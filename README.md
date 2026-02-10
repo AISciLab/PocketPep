@@ -14,7 +14,7 @@ Since ESMC has higher Python version requirements, an additional environment is 
 The model weights can be downloaded from [this link](https://drive.google.com/file/d/1SuhqbCUKjTJS0Fp-YkQsx5OGIgJW_PWX/view?usp=drive_link).
 Please download them and replace the corresponding directory with the downloaded files.
 
-# 2.Example Workflow
+## 2.Example Workflow
 **First**, structural features of the target binding pocket are extracted using `get_pocket.py` from the `ProteinMPNN` module in the `datasets` directory. 
 
 These pocket representations are subsequently used to guide the generation of compatible peptide sequences and to support downstream binding affinity prediction.
@@ -78,3 +78,4 @@ optional arguments:
   --pocket-path POCKET_PATH
                         Structural representation of the binding pocket used for inferring peptide affinity.
 ```
+
