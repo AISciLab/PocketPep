@@ -60,13 +60,21 @@ def main(args):
         data = preprocess_function(args.pocket_path,args.seq,device)
         output = model(data['pocket_embs_tensor'], data['pocket_mask'], data['pp_embs_tensor'], data['pp_mask'])
     score = output.item()
-    print('Aff is ',score)
+    ids = ['peptide']
+    scores = [score]
+    df = pd.DataFrame({
+        "id": ids,
+        "score": scores
+    })
+    df.to_csv(args.out_path, index=False)
+    print('work down!')
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--ckpt-path", type=str, default='datasets/aff_monitor/model.pt')
-    parser.add_argument("--seq", type=str, default='HFTVWHDYSI')
-    parser.add_argument("--pocket-path", type=str, default='example/pocket.pkl')
+    parser.add_argument("--out-path", type=str, default="example/output/res.csv",help="Path to the output file where the predicted affinity scores will be saved.")
+    parser.add_argument("--ckpt-path", type=str, default='datasets/aff_monitor/model.pt',help="Path to the aff_monitor model checkpoint file.")
+    parser.add_argument("--seq", type=str, default='HFTVWHDYSI',help="Peptide sequence used for inferring binding affinity.")
+    parser.add_argument("--pocket-path", type=str, default='example/pocket.pkl',help="Structural representation of the binding pocket used for inferring peptide affinity.")
     args = parser.parse_args()
     import multiprocessing
     multiprocessing.set_start_method('spawn')

@@ -61,19 +61,20 @@ def main(args):
     )
     seq_ids = res.squeeze().tolist()
     decoded_seq = "".join(id_to_aa[i] for i in seq_ids)
+    print(f"Generated sequence: {decoded_seq}")
     fasta_content = f">peptide\n{decoded_seq}\n"
-    with open(f"{args.results_dir}/peptide.fasta", "w") as f:
+    with open(f"{args.out_path}", "w") as f:
         f.write(fasta_content)
     print('word done!')
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--results-dir", type=str, default="example/output")
-    parser.add_argument("--ckpt-path", type=str, default='datasets/PocketPep_ckpt')
-    parser.add_argument("--decoder-path", type=str, default='datasets/decoder_Pep/model.pt')
-    parser.add_argument("--pocket-path", type=str, default='example/pocket.pkl')
-    parser.add_argument("--length", type=int, default=10)
-    parser.add_argument("--num-sampling-steps", type=int, default=50)
+    parser.add_argument("--out-path", type=str, default="example/output/peptide.fasta",help="Path to the output FASTA file where the extracted protein sequence will be saved.")
+    parser.add_argument("--ckpt-path", type=str, default='datasets/PocketPep_ckpt',help="Path to the PocketPep model checkpoint file.")
+    parser.add_argument("--decoder-path", type=str, default='datasets/decoder_Pep/model.pt',help="Path to the Decoder model checkpoint file.")
+    parser.add_argument("--pocket-path", type=str, default='example/pocket.pkl',help="Path to the PKL file containing the structural features of the peptide-binding pocket.")
+    parser.add_argument("--length", type=int, default=10,help="Length of the peptide sequence to be generated.")
+    parser.add_argument("--num-sampling-steps", type=int, default=50,help="Number of denoising sampling steps used during peptide sequence generation.")
     args = parser.parse_args()
     import multiprocessing
     multiprocessing.set_start_method('spawn')
