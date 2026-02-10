@@ -10,3 +10,6 @@ Therefore, we propose a target-specific peptide design framework, called **Pocke
 
 For the denoising model, please refer to the dependencies specified in the  [`environment.yml`](environment.yml) file.  
 Since ESMC has higher Python version requirements, an additional environment is needed. Please ensure you use a newer Python version (e.g., Python 3.12 or above) to properly obtain sequence embeddings.
+
+The model weights can be downloaded from [this link](https://drive.google.com/file/d/1SuhqbCUKjTJS0Fp-YkQsx5OGIgJW_PWX/view?usp=drive_link).
+Please download them and replace the corresponding directory with the downloaded files.
