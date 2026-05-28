@@ -148,7 +148,7 @@ def main(args):
         pred_seq = loss_dict['pred_seq']
         output = reward_model(pockets, pocket_mask, pred_seq, mask)
         monitor_loss = get_reward(output)
-        loss = loss
+        loss = loss + monitor_loss
         opt.zero_grad()
         loss.backward()
         opt.step()
